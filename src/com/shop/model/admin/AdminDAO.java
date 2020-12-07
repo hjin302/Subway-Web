@@ -1,0 +1,28 @@
+package com.shop.model.admin;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.shop.domain.Admin;
+import com.shop.exception.AdminAuthException;
+import com.shop.exception.DMLException;
+
+@Repository
+public class AdminDAO {
+	@Autowired
+	private SqlSessionTemplate sessionTemplate;
+	
+	public Admin loginCheck(Admin admin){
+		Admin obj=null;
+		obj=sessionTemplate.selectOne("Admin.loginCheck", admin);
+		return obj;
+	}
+	
+}
+
+
+
+
+
+

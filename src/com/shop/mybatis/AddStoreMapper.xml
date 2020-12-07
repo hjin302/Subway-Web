@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AddStore">
+	
+	<resultMap type="AddStore" id="joinMap">
+		<id column="add_store_idx" property="add_store_idx"/>
+		<result column="title" property="title"/>	
+		<result column="content" property="content"/>	
+		<result column="regdate" property="regdate"/>	
+		<association column="member_idx" javaType="Member" property="member" select="Member.select"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="joinMap">
+		select * from add_store
+		order by add_store_idx desc   
+	</select>
+	
+	<select id="select" parameterType="int" resultMap="joinMap">
+		select * from add_store
+		where add_store_idx = #{add_store_idx}	
+	</select>
+	
+	<insert id="insert" parameterType="AddStore">
+		insert into add_store(add_store_idx, member_idx, title, content)
+		values(seq_add_store.nextval, #{member.member_idx},#{title},#{content})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from add_store 
+		where add_store_idx=#{add_store_idx}
+	</delete>
+
+</mapper>

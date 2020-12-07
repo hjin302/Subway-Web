@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+<typeAlias type="com.shop.domain.Member" alias="Member"/>
+<typeAlias type="com.shop.domain.AddStore" alias="AddStore"/>
+<typeAlias type="com.shop.domain.Category" alias="Category"/>
+<typeAlias type="com.shop.domain.Admin" alias="Admin"/>
+<typeAlias type="com.shop.domain.Product" alias="Product"/>
+
+<typeAlias type="com.shop.domain.Notice" alias="Notice"/>
+<typeAlias type="com.shop.domain.OrderDetail" alias="OrderDetail"/>
+<typeAlias type="com.shop.domain.OrderSummary" alias="OrderSummary"/>
+
+<typeAlias type="com.shop.domain.Event" alias="Event"/>
+<typeAlias type="com.shop.domain.EventProduct" alias="EventProduct"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/shop/mybatis/MemberMapper.xml"/>
+		<mapper resource="com/shop/mybatis/AddStoreMapper.xml"/>
+		<mapper resource="com/shop/mybatis/CategoryMapper.xml"/>
+		<mapper resource="com/shop/mybatis/AdminMapper.xml"/>
+		<mapper resource="com/shop/mybatis/ProductMapper.xml"/>
+		
+		<mapper resource="com/shop/mybatis/NoticeMapper.xml"/>
+		<mapper resource="com/shop/mybatis/OrderDetailMapper.xml"/>
+		<mapper resource="com/shop/mybatis/OrderSummaryMapper.xml"/>
+		
+		<mapper resource="com/shop/mybatis/EventMapper.xml"/>
+		<mapper resource="com/shop/mybatis/EventProductMapper.xml"/>
+	</mappers>
+</configuration>

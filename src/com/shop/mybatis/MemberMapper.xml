@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+	
+	<insert id="insert" parameterType="Member">
+		insert into member(member_idx, id ,password, name, email_id, email_domain, phone)
+		values(seq_member.nextval, #{id}, #{password}, #{name}, #{email_id}, #{email_domain}, #{phone})
+	</insert>
+	
+	<select id="loginCheck" parameterType="Member" resultType="Member">
+		select * from member 
+		where id=#{id} and password=#{password}
+	</select>
+	
+	<!-- 회원 정보 1건 가져오기 -->
+	<select id="select" parameterType="int" resultType="Member">
+		select * from member
+		where member_idx=#{member_idx}
+	</select>
+	
+	
+	<update id="update" parameterType="com.shop.domain.Member">
+      update member set member_idx=#{member_idx}
+      , password=#{password}
+      where member_idx=#{member_idx} 
+   </update>
+	
+</mapper>

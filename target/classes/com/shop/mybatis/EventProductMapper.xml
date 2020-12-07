@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EventProduct">
+	<resultMap type="EventProduct" id="joinMap">
+		<id column="event_product_idx" property="event_product_idx"/>
+
+		<association column="event_idx" property="event" 
+			javaType="Event" select="Event.select"/>
+			
+		<association column="product_idx" property="product" 
+			javaType="Product" select="Product.byId"/>			
+	</resultMap>
+	
+	<!-- 상품관리에서 호출 -->
+	<select id="selectAll" resultMap="joinMap">
+		select * from event_product		
+	</select>
+		
+	<select id="selectJoin" resultMap="joinMap">
+		select  
+		event_product_idx, 
+		p.product_idx as product_idx
+		, event_idx
+		from product p left outer join  event_product e 
+		on p.product_idx = e.product_idx		
+	</select>
+		
+	<select id="selectJoinByEventId" parameterType="int" resultMap="joinMap">
+		select  
+		event_product_idx, 
+		p.product_idx as product_idx
+		, event_idx
+		from product p , event_product e 
+		where p.product_idx = e.product_idx		
+		and event_idx=#{event_idx}
+	</select>		
+	
+	<select id="select" parameterType="int" resultMap="joinMap">
+		select * from event_product 
+		where event_product_idx=#{event_product_idx}
+	</select>		
+	
+	<insert id="insert" parameterType="EventProduct">
+		insert into event_product(event_product_idx,event_idx,product_idx)
+		values(seq_event_product.nextval,#{event.event_idx},#{product.product_idx})
+	</insert>	
+	
+	<update id="update" parameterType="EventProduct">
+		update event_product set event_idx=#{event.event_idx} 
+		, product_idx=#{product.product_idx }
+		where  event_product_idx=#{event_product_idx}
+	</update>	
+	
+	<delete id="delete" parameterType="int">
+		delete from event_product
+		where event_product_idx=#{event_product_idx}
+	</delete>	
+</mapper>
